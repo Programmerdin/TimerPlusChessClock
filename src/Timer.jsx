@@ -154,7 +154,7 @@ const Timer = () => {
 
         <input 
           type="number" 
-          value={time2}
+          value={convert_time_digits_in_array_into_seconds(desired_time2) - time2}
           onChange={(e) => setTime2(e.target.value * 1)} // *1 to convert to number from string
         ></input>
 
@@ -167,14 +167,19 @@ const Timer = () => {
         <br></br>
         
         <p>desired time1</p>
-        
-        <form>
-          <input 
-            type="text"
-            value={desired_time1}
-            onChange={(e) => setDesiredTime1(e.target.value)}
-          ></input>
-        </form>
+        <input 
+          type="text"
+          value={desired_time1}
+          onChange={(e) => setDesiredTime1(e.target.value)}
+        ></input>
+
+        <p>desired time2</p>
+        <input 
+          type="text"
+          value={desired_time2}
+          onChange={(e) => setDesiredTime1(e.target.value)}
+        ></input>
+
         <p>{convert_time_in_seconds_into_time_format(desired_time1)}</p>
         <p>{convert_time_in_seconds_into_time_format(desired_time2)}</p>
         
