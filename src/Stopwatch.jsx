@@ -43,7 +43,7 @@ const Stopwatch = () => {
       if (timer1On) {
         interval1 = setInterval(() => {
           // 100ms = 0.1 second
-          setTime1(prevTime1 => prevTime1 + 0.1)}, 100) 
+          setTime1(prevTime1 => prevTime1 + 0.01)}, 10) 
       } else {
         clearInterval(interval1)
       }
@@ -58,7 +58,7 @@ const Stopwatch = () => {
       if (timer2On) {
         interval2 = setInterval(() => {
           // 100ms = 0.1 second
-          setTime2(prevTime2 => prevTime2 + 0.1)}, 100) 
+          setTime2(prevTime2 => prevTime2 + 0.01)}, 10) 
       } else {
         clearInterval(interval2)
       }
@@ -70,17 +70,8 @@ const Stopwatch = () => {
     return (
     <div>
         <h1>Stopwatch</h1>
-        <input 
-          type="number" 
-          value={time1}
-          onChange={(e) => setTime1(e.target.value * 1)} // *1 to convert to number from string
-        ></input>
-
-        <input 
-          type="number" 
-          value={time2}
-          onChange={(e) => setTime2(e.target.value * 1)} // *1 to convert to number from string
-        ></input>
+        <div>{time1}</div>
+        <div>{time2}</div>
 
         {!timer1On && (<button onClick={handleTimer1On}>Run timer 1</button>)}
         {!timer2On && (<button onClick={handleTimer2On}>Run timer 2</button>)}

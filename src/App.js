@@ -1,12 +1,13 @@
 import React from "react";
-import Timer from './Timer'
 import Stopwatch from "./Stopwatch";
+import Timer from "./Timer";
 
 
 function App() {
   return (
     <div>
       <Stopwatch></Stopwatch>
+      <br></br>
       <br></br>
       <Timer></Timer>
     </div>
