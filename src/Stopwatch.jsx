@@ -66,12 +66,37 @@ const Stopwatch = () => {
       return () => clearInterval(interval2)
     }, [timer2On]);
 
+  //convert time_in_seconds into hh:mm:ss +0.ss format
+  function format_time_in_seconds (time_in_seconds) {
+    let hours_no_remainder = Math.abs(Math.floor(time_in_seconds/3600));
+    let hours_remainder_in_seconds = Math.abs(time_in_seconds%3600);
+    let minutes_no_remainder = Math.abs(Math.floor(hours_remainder_in_seconds/60));
+    let seconds = Math.abs(hours_remainder_in_seconds%60);
+    let milliseconds = Math.abs(seconds%1);
+
+    if (time_in_seconds<60) {
+      return(
+        `${seconds.toFixed(0)}s ${(milliseconds.toFixed(2)).slice(-2)}`
+      );
+    } else
+    if (time_in_seconds<3600) {
+      return(
+        `${minutes_no_remainder}m ${("0"+Math.floor(seconds)).slice(-2)}s ${(milliseconds.toFixed(2)).slice(-2)}`
+      );
+    } else
+    if (time_in_seconds>=3600) {
+      return(
+        `${hours_no_remainder}h ${("0"+minutes_no_remainder).slice(-2)}m ${("0"+Math.floor(seconds)).slice(-2)}s ${(milliseconds.toFixed(2)).slice(-2)}`
+      );
+    };
+  };
+
 
     return (
     <div>
         <h1>Stopwatch</h1>
-        <div>{time1}</div>
-        <div>{time2}</div>
+        <div>{format_time_in_seconds(time1)}</div>
+        <div>{format_time_in_seconds(time2)}</div>
 
         {!timer1On && (<button onClick={handleTimer1On}>Run timer 1</button>)}
         {!timer2On && (<button onClick={handleTimer2On}>Run timer 2</button>)}
