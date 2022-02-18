@@ -78,6 +78,7 @@ const Timer = () => {
     };
 
     //push text into an array in reverse order 
+
     let time_digits_in_array = [];
     for (let i = desired_time1.length; i >= 0; i--) {
       time_digits_in_array.push(get_digit_of_nth_position(desired_time1, i));
@@ -85,6 +86,7 @@ const Timer = () => {
 
     //convert time_digits_in_array into a number in seconds and times the array digits by 1 to convert to number format 
     //need to convert into seconds first because inputs like 599: 5 minutes 99 seconds should be displayed as 6min39seconds
+
     let time_in_seconds = 0;
     for (let i = 1; i < time_digits_in_array.length; i++) {
       if (i === 1) { //1s of seconds *need to still times it by 1 to change it from text format to number format
