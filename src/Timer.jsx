@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Timer.css"
 import "./Buttons.css"
+import "./Timer-InputDisplayOutput.css"
 
 const Timer = () => {
   const[time1, setTime1] = useState(0);
@@ -69,8 +70,8 @@ const Timer = () => {
 
 
 
-  const[user_input1,SetUserInput1] = useState(0);
-  const[user_input2,SetUserInput2] = useState(0);
+  const[user_input1,SetUserInput1] = useState('566');
+  const[user_input2,SetUserInput2] = useState('566');
 
   //format user input into hh:mm:ss format
   function format_timer_input (timer_input) {
@@ -201,28 +202,32 @@ const Timer = () => {
     return(
         <div className="entire-timer">
           <div className="left-side">
-            <p>actual input1:</p>
+            {/* where user types in */}
             <input
+              className="timer-input-field"
               type="number"
               value={user_input1}
               onChange={(e) => SetUserInput1(e.target.value)}
             ></input>
-            <p>display input1:</p>
-            <p>{format_timer_input(user_input1)}</p>
-            <p>timer 1 output: {format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input1)-time1)}</p>
+            <div 
+              className="timer-display-field"
+            >{format_timer_input(user_input1)}</div>
+            <p>{format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input1)-time1)}</p>
             {!timer1On && (<button onClick={handleTimer1On} className="run-button">Run</button>)}
           </div>
 
           <div className="right-side">
-            <p>actual input2:</p>
+            {/* where user types in */}
             <input
+                className="timer-input-field"
                 type="number"
                 value={user_input2}
                 onChange={(e) => SetUserInput2(e.target.value)}
             ></input>
-            <p>display input2:</p>
-            <p>{format_timer_input(user_input2)}</p>
-            <p>timer 2 output: {format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input2)-time2)}</p>
+            <div 
+              className="timer-display-field"
+            >{format_timer_input(user_input2)}</div>
+            <p>{format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input2)-time2)}</p>
             {!timer2On && (<button onClick={handleTimer2On} className="run-button">Run</button>)}
           </div>
 

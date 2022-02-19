@@ -98,16 +98,12 @@ const Stopwatch = () => {
     <div className="entire-stopwatch">
       <br></br>
       <div className="left-side">
-        <div>Stopwatch 1</div>
-        <br></br>
         <div>{format_time_in_seconds(time1)}</div>
         <br></br>
         {!timer1On && (<button onClick={handleTimer1On} className="run-button">Run</button>)}
       </div>
 
       <div className="right-side">
-        <div>Stopwatch 2</div>
-        <br></br>
         <div>{format_time_in_seconds(time2)}</div>
         <br></br>
         {!timer2On && (<button onClick={handleTimer2On} className="run-button">Run</button>)}

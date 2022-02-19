@@ -6,12 +6,14 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    border: 1px solid rgb(92, 149, 255);
 }
 
 body {
     margin: 0px;
     margin-top: 0.0cm;
     background-color: rgb(31, 31, 31);
+
 }
 
 .entire-top-toggle{
@@ -33,21 +35,21 @@ body {
 .display-component-true{
     border: 0;
     background-color: rgb(31, 31, 31);
-    color: rgb(37, 113, 255);
+    color: rgb(92, 149, 255);
     font-size: x-large;
     padding: 10px;
     width: 100%;
-    border-bottom: 0.2cm solid rgb(37, 113, 255);
+    border-bottom: 0.2cm solid rgb(92, 149, 255);
 }
 
 .display-component-false{
     border: 0;
-    color: rgb(100, 100, 100);
+    color: rgb(144, 144, 144);
     background-color: transparent;
     font-size: x-large;
     padding: 10px;
     width: 100%;
-    border-bottom: 0.2cm solid rgb(100, 100, 100);
+    border-bottom: 0.2cm solid rgb(144, 144, 144);
 }
 
 

@@ -2,12 +2,12 @@
     background-color: transparent;
     font-family: sans-serif;
     font-size: large;
-    color: rgb(37, 113, 255);
+    color: rgb(92, 149, 255);
     font-weight: 500;
     width: 2cm;
     height: 1.2cm;
     border-radius: 0.1cm;
-    border: 2px solid rgb(37, 113, 255);
+    border: 2px solid rgb(92, 149, 255);
     position: relative;
     outline: none;
     transition: ease-in-out 0.3s;
@@ -28,7 +28,7 @@
     bottom:0;
     opacity: 0;
     content: "";
-    background-color: rgb(37, 113, 255);
+    background-color: rgb(92, 149, 255);
 }
 
 .run-button:hover:before{
@@ -41,9 +41,9 @@
 
 .pause-button{
     border-radius: 0.1cm;
-    border: 2px solid rgb(114, 114, 114);
+    border: 2px solid rgb(144, 144, 144);
     background-color: transparent;
-    color: rgb(114, 114, 114);
+    color: rgb(144, 144, 144);
     font-family: sans-serif;
     font-size: medium;
     font-weight: 500;
@@ -71,7 +71,7 @@
 
 .pause-button:hover{
     transition: 0.5s;
-    background-color: rgb(114, 114, 114);
+    background-color: rgb(144, 144, 144);
     color: white;
     cursor: pointer;
 }
