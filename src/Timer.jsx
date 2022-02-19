@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "./Timer.css"
+import "./Buttons.css"
 
 const Timer = () => {
   const[time1, setTime1] = useState(0);
@@ -174,6 +176,11 @@ const Timer = () => {
         `${minutes_no_remainder}m ${("0"+Math.floor(seconds)).slice(-2)}s`
       );
     } else
+    if (time_in_seconds===0) {
+      return(
+        `${seconds.toFixed(0)}s`
+      );
+    } else
     if (time_in_seconds<60) {
       return(
         `${seconds.toFixed(1)}s`
@@ -192,42 +199,44 @@ const Timer = () => {
   };
 
     return(
-        <div>
-          <h1>Timer</h1>
-
-          <p>actual input1:</p>
-          <input
-            type="number"
-            value={user_input1}
-            onChange={(e) => SetUserInput1(e.target.value)}
-          ></input>
-          <p>display input1:</p>
-          <p>{format_timer_input(user_input1)}</p>
-          <p>display input1 in seconds:</p>
-          <p>{convert_time_digits_in_array_into_seconds(user_input1)}</p>
-          
-          <br></br>
-          
-          <p>actual input2:</p>
-          <input
+        <div className="entire-timer">
+          <div className="left-side">
+            <p>actual input1:</p>
+            <input
               type="number"
-              value={user_input2}
-              onChange={(e) => SetUserInput2(e.target.value)}
-          ></input>
-          <p>display input2:</p>
-          <p>{format_timer_input(user_input2)}</p>
-          <p>display input2 in seconds:</p>
-          <p>{convert_time_digits_in_array_into_seconds(user_input2)}</p>
+              value={user_input1}
+              onChange={(e) => SetUserInput1(e.target.value)}
+            ></input>
+            <p>display input1:</p>
+            <p>{format_timer_input(user_input1)}</p>
+            <p>timer 1 output: {format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input1)-time1)}</p>
+            {!timer1On && (<button onClick={handleTimer1On} className="run-button">Run</button>)}
+          </div>
+
+          <div className="right-side">
+            <p>actual input2:</p>
+            <input
+                type="number"
+                value={user_input2}
+                onChange={(e) => SetUserInput2(e.target.value)}
+            ></input>
+            <p>display input2:</p>
+            <p>{format_timer_input(user_input2)}</p>
+            <p>timer 2 output: {format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input2)-time2)}</p>
+            {!timer2On && (<button onClick={handleTimer2On} className="run-button">Run</button>)}
+          </div>
+
+          <div className="center-content">
+            <br></br>
+            {timer1On||timer2On ? (<button onClick={handleTimer1and2} className="pause-button">Pause</button>) : ""}
+            {time1!=0||time2!=0 ? (<button onClick={resetTimer1and2} className="reset-button">Reset</button>) : ""}
+          </div>
+
           
-          <br></br>
           
-          <p>timer 1 output: {format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input1)-time1)}</p>
-          <p>timer 2 output: {format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input2)-time2)}</p>
           
-          {!timer1On && (<button onClick={handleTimer1On}>Run timer 1</button>)}
-          {!timer2On && (<button onClick={handleTimer2On}>Run timer 2</button>)}
-          {timer1On||timer2On ? (<button onClick={handleTimer1and2}>Pause</button>) : ""}
-          {time1!=0||time2!=0 ? (<button onClick={resetTimer1and2}>reset</button>) : ""}
+          
+          
         </div>
     );
 };

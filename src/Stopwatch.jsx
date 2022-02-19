@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import "./Stopwatch.css"
+import "./Buttons.css"
 
 
 const Stopwatch = () => {
@@ -93,16 +95,30 @@ const Stopwatch = () => {
 
 
     return (
-    <div>
-        <h1>Stopwatch</h1>
+    <div className="entire-stopwatch">
+      <br></br>
+      <div className="left-side">
+        <div>Stopwatch 1</div>
+        <br></br>
         <div>{format_time_in_seconds(time1)}</div>
-        <div>{format_time_in_seconds(time2)}</div>
+        <br></br>
+        {!timer1On && (<button onClick={handleTimer1On} className="run-button">Run</button>)}
+      </div>
 
-        {!timer1On && (<button onClick={handleTimer1On}>Run timer 1</button>)}
-        {!timer2On && (<button onClick={handleTimer2On}>Run timer 2</button>)}
-        {timer1On||timer2On ? (<button onClick={handleTimer1and2}>Pause</button>) : ""}
-        {time1!=0||time2!=0 ? (<button onClick={resetTimer1and2}>reset</button>) : ""}
-        
+      <div className="right-side">
+        <div>Stopwatch 2</div>
+        <br></br>
+        <div>{format_time_in_seconds(time2)}</div>
+        <br></br>
+        {!timer2On && (<button onClick={handleTimer2On} className="run-button">Run</button>)}
+      </div>  
+
+      <div className="center-content">
+        <br></br>
+        {timer1On||timer2On ? (<button onClick={handleTimer1and2} className="pause-button">Pause</button>) : ""}
+        {time1!=0||time2!=0 ? (<button onClick={resetTimer1and2} className="reset-button">Reset</button>) : ""}
+      </div>
+      
     </div>
   );
 };
