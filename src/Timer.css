@@ -11,11 +11,15 @@
 .left-side{
     grid-column-start: 1;
     grid-column-end: 2;
+    position: relative;
+    width: 100%;
 }
 
 .right-side{
     grid-column-start: 2;
     grid-column-end: 3;
+    position: relative;
+    width: 100%;
 }
 
 .center-content{

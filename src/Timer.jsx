@@ -70,15 +70,17 @@ const Timer = () => {
 
 
 
-  const[user_input1,SetUserInput1] = useState('566');
-  const[user_input2,SetUserInput2] = useState('566');
+  const[user_input1,SetUserInput1] = useState('77');
+  const[user_input2,SetUserInput2] = useState('500');
 
   //format user input into hh:mm:ss format
   function format_timer_input (timer_input) {
-      if (!timer_input) return timer_input;
       const clean_timer_input = timer_input.replace(/[^\d]/g,"");
       const timer_input_length = clean_timer_input.length;
       
+      if (timer_input_length === 0) { //return seconds
+        return `0s`
+      ;} else
       if (timer_input_length < 3) { //return seconds
         return `${clean_timer_input}s`
       ;} else
@@ -184,7 +186,7 @@ const Timer = () => {
     } else
     if (time_in_seconds<60) {
       return(
-        `${seconds.toFixed(1)}s`
+        `${seconds.toFixed(0)}s`
       );
     } else
     if (time_in_seconds<3600) {
@@ -202,32 +204,49 @@ const Timer = () => {
     return(
         <div className="entire-timer">
           <div className="left-side">
-            {/* where user types in */}
-            <input
-              className="timer-input-field"
-              type="number"
-              value={user_input1}
-              onChange={(e) => SetUserInput1(e.target.value)}
-            ></input>
+            <br></br>
+            <div className="timer-input-field-div">
+              <input
+                className={timer1On||timer2On?"timer-input-field-false":"timer-input-field"}
+                type="number"
+                value={user_input1}
+                onChange={(e) => SetUserInput1(e.target.value)}
+              ></input>
+            </div>
+            
             <div 
-              className="timer-display-field"
+              className="timer-display-field-div"
             >{format_timer_input(user_input1)}</div>
-            <p>{format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input1)-time1)}</p>
+            <div
+              className={timer1On||timer2On?"timer-output-field-div":"timer-output-field-div-false"}
+            >{format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input1)-time1)}</div>
+            <br></br>
+            <br></br>
+            <br></br>
             {!timer1On && (<button onClick={handleTimer1On} className="run-button">Run</button>)}
           </div>
 
           <div className="right-side">
-            {/* where user types in */}
-            <input
-                className="timer-input-field"
+            <br></br>
+            <div className="timer-input-field-div">
+              <input
+                className={timer1On||timer2On?"timer-input-field-false":"timer-input-field"}
                 type="number"
                 value={user_input2}
                 onChange={(e) => SetUserInput2(e.target.value)}
-            ></input>
+              ></input>
+            </div>
+
             <div 
-              className="timer-display-field"
+              className="timer-display-field-div"
             >{format_timer_input(user_input2)}</div>
-            <p>{format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input2)-time2)}</p>
+            
+            <div
+              className={timer1On||timer2On?"timer-output-field-div":"timer-output-field-div-false"}
+            >{format_time_in_seconds(convert_time_digits_in_array_into_seconds(user_input2)-time2)}</div>
+            <br></br>
+            <br></br>
+            <br></br>
             {!timer2On && (<button onClick={handleTimer2On} className="run-button">Run</button>)}
           </div>
 
