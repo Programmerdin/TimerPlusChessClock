@@ -19,8 +19,9 @@ const TimerTesting = () => {
   };
 
   //set output useState
-  const [output1_state,setOutput1State] = useState('');
-  const [output2_state,setOutput2State] = useState('');
+  const [output1_state,setOutput1State] = useState(0);
+  const [output2_state,setOutput2State] = useState(0);
+
 
   //Reset
   const ResetTimer1and2 = () => {
@@ -78,30 +79,29 @@ const TimerTesting = () => {
       `${clean_raw_input.slice(0,-4)} ${clean_raw_input.slice(-4,-2)} ${clean_raw_input.slice(-2)}`
     );
   };
-
-  function Level1FormatToPureSeconds (level1_formatted_time_input) {
-    //remove spaces from the level1 formatted time
-    const cleaned_level1_formatted_time = level1_formatted_time_input.replace(/\s+/g, '')
-    
-    //convert to seconds
-    const length_of_cleaned_level1_formatted_time = cleaned_level1_formatted_time.length;
-    const time_in_pure_seconds = '';
-
-    if(length_of_cleaned_level1_formatted_time===1){
-      time_in_pure_seconds = cleaned_level1_formatted_time;
-    } else
-    if(){
-      
-    }
-
-  };
-
   const handleRawToLevel1Format = (e) => {
     const level1_formatted_time = rawToLevel1Format(e.target.value);
     setUserInput1State(level1_formatted_time);
   };
 
+  function Level1FormatToPureSeconds (level1_formatted_time_input) {
+    //remove spaces from the level1 formatted time and covert it into number format
+    const cleaned_level1_formatted_time = level1_formatted_time_input.replace(/\s+/g, '');
 
+    //get character length of the cleaned level1 formatted time
+    let length_of_cleaned_level1_formatted_time = cleaned_level1_formatted_time.length;
+
+    //below 2 lines for for loop that will add up all the seconds from each digit of cleaned lvl1 formatted time
+    let time_in_pure_seconds = 0;
+    const time_multiply_factor_array = [1,10,60,600,3600,36000,360000,3600000];
+
+    for (let i=length_of_cleaned_level1_formatted_time; i>0; i--){
+      time_in_pure_seconds = time_in_pure_seconds + (Number(cleaned_level1_formatted_time.charAt(i-1))*Number(time_multiply_factor_array[length_of_cleaned_level1_formatted_time-i]));
+      // //get an array 1,10,60,600,3600,36000 and look up what to times it by based on i
+      // //add the (specific digit x value from array) to time in pure seconds
+      console.log(time_in_pure_seconds);
+    };
+  };
 
   //timer 1
   useEffect(() => {
@@ -142,6 +142,7 @@ const TimerTesting = () => {
       <p>user_input1_state:{user_input1_state}</p>
       <p>output1_state:{output1_state}</p>
       <p>timer1:{timer1}</p>
+      <p>output1-timer1:{output1_state-timer1}</p>
     </div>
   );
 };
