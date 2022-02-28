@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "./Buttons.css"
+import "./TimerTesting.css"
 
 const TimerTesting = () => {
   //set userinput useState
@@ -10,27 +12,46 @@ const TimerTesting = () => {
   const [timer2,setTimer2] = useState(0);
   const [timer1On,setTimer1On] = useState(false);
   const [timer2On,setTimer2On] = useState(false);
-  //turn timers on and update output states
-  const handleSetTimer1OnAndSetOutput1State = () => {
-    setTimer1On(true);
-    setOutput1State(Level1FormatToPureSeconds(rawToLevel1Format(user_input1_state)));
-  };
-  //turn timers off and update user_input_states to level2format(output-timer)
-  const handleSetTimer1OffAndSetUserInput1State = () => {
-    setTimer1On(false);
-    setUserInput1State(PureSecondsToLevel2Format(output1_state-timer1));
-  };
-
+  
   //set output useState
   const [output1_state,setOutput1State] = useState(0);
   const [output2_state,setOutput2State] = useState(0);
+  
+  //turn timer1 on and turn timer2 off
+  //then format user_input
+  //then update output_state with pure seconds ver of user_input_states
+  const handleTimer1RunButton = () => {
+    setTimer1On(true);
+    setTimer2On(false);
+    setOutput1State(Level1FormatToPureSeconds(rawToLevel1Format(user_input1_state)));
+    setOutput2State(Level1FormatToPureSeconds(rawToLevel1Format(user_input2_state)));
+  };
+  const handleTimer2RunButton = () => {
+    setTimer1On(false);
+    setTimer2On(true);
+    setOutput1State(Level1FormatToPureSeconds(rawToLevel1Format(user_input1_state)));
+    setOutput2State(Level1FormatToPureSeconds(rawToLevel1Format(user_input2_state)));
+  };
+
+
+  //Pause
+  //turn timers off and update user_input_states to level2format(output_state-timer)
+  const PauseTimer1and2 = () => {
+    setTimer1On(false);
+    setTimer2On(false);
+    setUserInput1State(PureSecondsToLevel2Format(output1_state-timer1));
+    setUserInput2State(PureSecondsToLevel2Format(output2_state-timer2));
+  };
 
   //Reset
+  //turn timers off and update user_input_state to level2format(output_state)
   const ResetTimer1and2 = () => {
     setTimer1(0);
     setTimer2(0);
     setTimer1On(false);
     setTimer2On(false);
+    setUserInput1State(PureSecondsToLevel2Format(output1_state));
+    setUserInput2State(PureSecondsToLevel2Format(output2_state));
   };
 
   //1.user types pure nums in
@@ -76,9 +97,16 @@ const TimerTesting = () => {
       `${clean_raw_input.slice(0,-4)} ${clean_raw_input.slice(-4,-2)} ${clean_raw_input.slice(-2)}`
     );
   };
-  const handleRawToLevel1Format = (e) => {
+  
+  //format userinput from raw to level1
+  //update user_input_states with level1
+  const handleUserInput1StateRawToLevel1Format = (e) => {
     const level1_formatted_time = rawToLevel1Format(e.target.value);
     setUserInput1State(level1_formatted_time);
+  };
+  const handleUserInput2StateRawToLevel1Format = (e) => {
+    const level2_formatted_time = rawToLevel1Format(e.target.value);
+    setUserInput2State(level2_formatted_time);
   };
 
   function Level1FormatToPureSeconds (level1_formatted_time_input) {
@@ -166,19 +194,55 @@ const TimerTesting = () => {
   }, [timer2On]);
 
   return(
-    <div>
-      <input 
-        onChange={(e)=>handleRawToLevel1Format(e)}
-        value={user_input1_state}
-      ></input>
-      <button onClick={handleSetTimer1OnAndSetOutput1State}>Run</button>
-      <button onClick={handleSetTimer1OffAndSetUserInput1State}>Pause</button>
-      <button onClick={ResetTimer1and2}>Reset</button>
-      <p>user_input1_state:{user_input1_state}</p>
-      <p>output1_state:{output1_state}</p>
-      <p>timer1:{timer1}</p>
-      <p>output1-timer1:{output1_state-timer1}</p>
-      <p>Level2Format(output1-timer1):{PureSecondsToLevel2Format(output1_state-timer1)}</p>
+    <div className="entire-timer">
+      <div className="left-side">
+        <div className={timer1On||timer2On?"display-none":"display-user-input"}>
+          <br></br>
+          <input 
+            onChange={(e)=>handleUserInput1StateRawToLevel1Format(e)}
+            value={user_input1_state}
+            className="user-input"
+            placeholder="00h 00m 00s"
+          ></input>
+        </div>
+        
+        <div className={!timer1On&&!timer2On?"display-none":"display-level2-format"}>
+          {PureSecondsToLevel2Format(output1_state-timer1)}
+        </div>
+        
+        <div className={timer1On?"display-none":"display-run-button"}>
+        <br></br>
+          <button onClick={handleTimer1RunButton} className="run-button">Run</button>
+        </div>
+        
+      </div>
+
+      <div className="right-side">
+        <div className={timer1On||timer2On?"display-none":"display-user-input"}>
+          <br></br>
+          <input 
+            onChange={(e)=>handleUserInput2StateRawToLevel1Format(e)}
+            value={user_input2_state}
+            className="user-input"
+            placeholder="00h 00m 00s"
+          ></input>
+        </div>
+        
+        <div className={!timer1On&&!timer2On?"display-none":"display-level2-format"}>
+          {PureSecondsToLevel2Format(output2_state-timer2)}
+        </div>
+        
+        <div className={timer2On?"display-none":"display-run-button"}>
+          <br></br>
+          <button onClick={handleTimer2RunButton} className="run-button">Run</button>
+        </div>
+      </div>
+     
+      <div className="center-content">
+        {timer1On||timer2On ? (<button onClick={PauseTimer1and2} className="pause-button">Pause</button>) : ""}
+        {timer1!=0||timer2!=0 ? (<button onClick={ResetTimer1and2} className="reset-button">Reset</button>) : ""}
+      </div>
+
     </div>
   );
 };

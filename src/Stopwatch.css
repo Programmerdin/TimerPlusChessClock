@@ -4,18 +4,22 @@
     text-align: center;
     justify-items: center;
     margin: 0;
-    font-size: xx-large;
+    font-size: x-large;
     background-color: rgb(31, 31, 31);
 }
 
 .left-side{
     grid-column-start: 1;
     grid-column-end: 2;
+    position: relative;
+    width: 100%;
 }
 
 .right-side{
     grid-column-start: 2;
     grid-column-end: 3;
+    position: relative;
+    width: 100%;
 }
 
 .center-content{

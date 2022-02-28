@@ -255,12 +255,6 @@ const Timer = () => {
             {timer1On||timer2On ? (<button onClick={handleTimer1and2} className="pause-button">Pause</button>) : ""}
             {time1!=0||time2!=0 ? (<button onClick={resetTimer1and2} className="reset-button">Reset</button>) : ""}
           </div>
-
-          
-          
-          
-          
-          
         </div>
     );
 };

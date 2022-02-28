@@ -42,14 +42,14 @@ function App() {
         </div>
 
         <div className={!displayTimer && "display-content-false"}>
-          <Timer></Timer>
+          <TimerTesting></TimerTesting>
         </div>
         <div className={!displayStopwatch && "display-content-false"}>
           <Stopwatch></Stopwatch>
         </div>
       </div>
       
-      <TimerTesting></TimerTesting>
+
     </React.Fragment>
 
   );
