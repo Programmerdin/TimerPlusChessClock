@@ -45,21 +45,20 @@
 }
 
 .user-input{
-    text-align: right;
+    text-align: center;
     outline: none;
     border: none;
     padding: 0px;
     background-color: transparent;
     color: white;
     font-size: x-large;
-    border-bottom: 2px solid rgba(117, 117, 117, 0.246);
     width: 90%;
 }
 .user-input:focus{
-    border-bottom: 2px solid rgb(92, 149, 255);
+
 }
 
 .user-input:hover{
     transition: 0.3s;
-    border-bottom: 2px solid white;
+    cursor: pointer;
 }

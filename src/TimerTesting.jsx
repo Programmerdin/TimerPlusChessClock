@@ -69,32 +69,32 @@ const TimerTesting = () => {
   //level2Format: formatted time and correct 
   function rawToLevel1Format (timer_raw_input) {
     if (!timer_raw_input) return timer_raw_input;
-    const clean_raw_input = timer_raw_input.replace(/[^\d]/g, "");
+    const clean_raw_input = timer_raw_input.replace(/\D+/g, "").replace(/\s+/g, '');
     const clean_raw_input_length = clean_raw_input.length;
     if (clean_raw_input_length < 3) { //return seconds
-      return clean_raw_input
+      return `${clean_raw_input}s`
     ;} else
     if (clean_raw_input_length < 4) { //return mm ss
       return(
-        `${clean_raw_input.slice(0,1)} ${clean_raw_input.slice(-2)}`
+        `${clean_raw_input.slice(0,1)}m ${clean_raw_input.slice(-2)}s`
       );
     } else 
     if (clean_raw_input_length < 5) { //return mm ss
       return(
-        `${clean_raw_input.slice(0,2)} ${clean_raw_input.slice(-2)}`
+        `${clean_raw_input.slice(0,2)}m ${clean_raw_input.slice(-2)}s`
       );
     } else 
     if (clean_raw_input_length < 6) { //return mm ss
       return(
-        `${clean_raw_input.slice(0,1)} ${clean_raw_input.slice(-4,-2)} ${clean_raw_input.slice(-2)}`
+        `${clean_raw_input.slice(0,1)}h ${clean_raw_input.slice(-4,-2)}m ${clean_raw_input.slice(-2)}s`
       );
     } else 
     if (clean_raw_input_length < 7) { //return mm ss
       return(
-        `${clean_raw_input.slice(0,2)} ${clean_raw_input.slice(-4,-2)} ${clean_raw_input.slice(-2)}`
+        `${clean_raw_input.slice(0,2)}h ${clean_raw_input.slice(-4,-2)}m ${clean_raw_input.slice(-2)}s`
       );
     } else return (
-      `${clean_raw_input.slice(0,-4)} ${clean_raw_input.slice(-4,-2)} ${clean_raw_input.slice(-2)}`
+      `${clean_raw_input.slice(0,-4)}h ${clean_raw_input.slice(-4,-2)}m ${clean_raw_input.slice(-2)}s`
     );
   };
   
@@ -111,7 +111,7 @@ const TimerTesting = () => {
 
   function Level1FormatToPureSeconds (level1_formatted_time_input) {
     //remove spaces from the level1 formatted time and covert it into number format
-    const cleaned_level1_formatted_time = level1_formatted_time_input.replace(/\s+/g, '');
+    const cleaned_level1_formatted_time = level1_formatted_time_input.replace(/\D+/g, "").replace(/\s+/g, '');
 
     //get character length of the cleaned level1 formatted time
     let length_of_cleaned_level1_formatted_time = cleaned_level1_formatted_time.length;
@@ -136,32 +136,32 @@ const TimerTesting = () => {
     
     if(time_in_seconds<-3600){
       return(
-        `${hours_no_remainder} ${("0"+minutes_no_remainder).slice(-2)} ${Math.floor(seconds)}`
+        `${hours_no_remainder}h ${("0"+minutes_no_remainder).slice(-2)}m ${Math.floor(seconds)}s`
       );
     } else
     if (time_in_seconds<-60) {
       return(
-        `${minutes_no_remainder} ${("0"+Math.floor(seconds)).slice(-2)}`
+        `${minutes_no_remainder}m ${("0"+Math.floor(seconds)).slice(-2)}s`
       );
     } else
     if (time_in_seconds===0) {
       return(
-        `${seconds.toFixed(0)}`
+        `${seconds.toFixed(0)}s`
       );
     } else
     if (time_in_seconds<60) {
       return(
-        `${seconds.toFixed(0)}`
+        `${seconds.toFixed(0)}s`
       );
     } else
     if (time_in_seconds<3600) {
       return(
-        `${minutes_no_remainder} ${("0"+Math.floor(seconds)).slice(-2)}`
+        `${minutes_no_remainder}m ${("0"+Math.floor(seconds)).slice(-2)}s`
       );
     } else
     if (time_in_seconds>=3600) {
       return(
-        `${hours_no_remainder} ${("0"+minutes_no_remainder).slice(-2)} ${("0"+Math.floor(seconds)).slice(-2)}`
+        `${hours_no_remainder}h ${("0"+minutes_no_remainder).slice(-2)}m ${("0"+Math.floor(seconds)).slice(-2)}s`
       );
     };
   };
@@ -207,6 +207,7 @@ const TimerTesting = () => {
         </div>
         
         <div className={!timer1On&&!timer2On?"display-none":"display-level2-format"}>
+          <br></br>
           {PureSecondsToLevel2Format(output1_state-timer1)}
         </div>
         
@@ -229,6 +230,7 @@ const TimerTesting = () => {
         </div>
         
         <div className={!timer1On&&!timer2On?"display-none":"display-level2-format"}>
+          <br></br>
           {PureSecondsToLevel2Format(output2_state-timer2)}
         </div>
         

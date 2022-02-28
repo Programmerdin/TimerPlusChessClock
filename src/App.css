@@ -40,7 +40,7 @@ body {
     font-size: x-large;
     padding: 10px;
     width: 100%;
-    border-bottom: 0.2cm solid rgb(92, 149, 255);
+    border-bottom: 3px solid rgb(92, 149, 255);
 }
 
 .display-component-false{
@@ -50,7 +50,7 @@ body {
     font-size: x-large;
     padding: 10px;
     width: 100%;
-    border-bottom: 0.2cm solid rgb(144, 144, 144);
+    border-bottom: 3px solid rgb(144, 144, 144);
 }
 
 
